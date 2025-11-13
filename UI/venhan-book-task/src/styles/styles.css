@@ -1,0 +1,205 @@
+:root {
+  --primary: #7c3aed; /* purple */
+  --primary-dark: #5b21b6;
+  --bg: #f8f7fc;
+  --muted: #6b7280;
+  --text-dark: #1f2937;
+  --success: #16a34a;
+  --error: #dc2626;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.app .container {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Navbar */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 14px 24px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+  border-radius: 0 0 12px 12px;
+}
+
+.nav .nav-brand {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 20px;
+}
+
+.nav .nav-links a {
+  margin-left: 14px;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.nav .nav-links a:hover {
+  color: var(--primary);
+}
+
+.nav .nav-links a.active {
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* Page headers */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0;
+}
+
+/* Buttons */
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Table / Lists */
+.list {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  margin-top: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.list th,
+.list td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.list th {
+  background: #f3e8ff;
+  color: var(--primary-dark);
+}
+
+/* Form */
+.form {
+  background: white;
+  padding: 16px;
+  border-radius: 10px;
+  display: grid;
+  gap: 12px;
+  max-width: 600px;
+}
+
+.form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.form input,
+.form select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form input:focus,
+.form select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.15);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Alerts / Messages */
+.error {
+  color: var(--error);
+  background: #fee2e2;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.message {
+  color: var(--success);
+  margin-top: 8px;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toast.error {
+  background: #fee2e2;
+  color: var(--error);
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .form {
+    width: 100%;
+  }
+}
