@@ -1,4 +1,6 @@
-﻿using VenhanBookManagementTask.Models;
+﻿using System;
+using System.Linq;
+using VenhanBookManagementTask.Models;
 using VenhanBookManagementTask.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +19,6 @@ namespace VenhanBookManagementTask.Controllers
             _logger = logger;
         }
 
-        
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -33,7 +34,6 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-        
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -52,12 +52,21 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-       
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] BookModel book)
         {
             if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            {
+                var details = ModelState
+                    .Where(kv => kv.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kv => kv.Key,
+                        kv => kv.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                _logger.LogWarning("ModelState invalid for Create Book: {@Details}", details);
+                return BadRequest(new { error = "Invalid payload", details });
+            }
 
             try
             {
@@ -76,7 +85,6 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-        
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] BookModel book)
         {
@@ -103,7 +111,6 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-        // ✅ Delete Book
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -124,7 +131,6 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-        // ✅ Search Books (by title, author, or genre)
         [HttpGet("search")]
         public async Task<IActionResult> Search([FromQuery] string? title, [FromQuery] string? author, [FromQuery] string? genre)
         {

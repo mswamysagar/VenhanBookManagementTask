@@ -30,19 +30,12 @@ namespace VenhanBookManagementTask.Services
         }
 
         // ✅ Get Borrower by ID
+        // Return null when not found; controller maps to 404
         public async Task<BorrowerModel?> GetByIdAsync(Guid id)
         {
             try
             {
-                var borrower = await _repo.GetByIdAsync(id);
-                if (borrower == null)
-                    throw new ApplicationException("Borrower not found.");
-
-                return borrower;
-            }
-            catch (ApplicationException)
-            {
-                throw;
+                return await _repo.GetByIdAsync(id);
             }
             catch (Exception ex)
             {

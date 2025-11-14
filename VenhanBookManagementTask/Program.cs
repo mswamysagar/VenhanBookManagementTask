@@ -16,7 +16,7 @@ builder.Services.AddDbContext<BookContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactFrontend", policy =>
-        policy.WithOrigins("http://localhost:5173") // <-- React frontend URL
+        policy.WithOrigins("http://localhost:5173")
               .AllowAnyHeader()
               .AllowAnyMethod());
 });

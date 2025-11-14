@@ -37,15 +37,9 @@ namespace VenhanBookManagementTask.Repository
         {
             try
             {
+                // Return null when not found; caller (service/controller) decides how to react
                 var borrower = await _context.Borrowers.FindAsync(borrowerId);
-                if (borrower == null)
-                    throw new ApplicationException($"Borrower with ID '{borrowerId}' not found.");
-
                 return borrower;
-            }
-            catch (ApplicationException)
-            {
-                throw;
             }
             catch (Exception ex)
             {
