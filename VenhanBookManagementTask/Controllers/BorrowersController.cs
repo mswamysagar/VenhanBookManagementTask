@@ -22,7 +22,7 @@ namespace VenhanBookManagementTask.Controllers
             _logger = logger;
         }
 
-        // Debugger helper (avoids missing method compile/diagnostic issues)
+        
         private string GetDebuggerDisplay() => $"BorrowersController (svc: {_svc?.GetType().Name ?? "null"})";
 
         [HttpGet]

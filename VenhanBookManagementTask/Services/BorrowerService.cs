@@ -16,7 +16,7 @@ namespace VenhanBookManagementTask.Services
             _repo = repo;
         }
 
-        // ✅ Get All Borrowers
+       
         public async Task<IEnumerable<BorrowerModel>> GetAllAsync()
         {
             try
@@ -29,8 +29,6 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Get Borrower by ID
-        // Return null when not found; controller maps to 404
         public async Task<BorrowerModel?> GetByIdAsync(Guid id)
         {
             try
@@ -43,7 +41,7 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Add New Borrower
+     
         public async Task AddAsync(BorrowerModel borrower)
         {
             try
@@ -72,7 +70,7 @@ namespace VenhanBookManagementTask.Services
                 var existing = await _repo.GetByIdAsync(borrower.BorrowerId)
                     ?? throw new ApplicationException("Borrower not found for update.");
 
-                // Update fields
+                
                 existing.Name = borrower.Name;
                 existing.Email = borrower.Email;
                 existing.ContactNumber = borrower.ContactNumber;
@@ -90,7 +88,7 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Delete Borrower
+        
         public async Task DeleteAsync(Guid id)
         {
             try

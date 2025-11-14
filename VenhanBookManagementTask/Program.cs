@@ -8,11 +8,11 @@ using VenhanBookManagementTask.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ? Database connection
+
 builder.Services.AddDbContext<BookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultDb")));
 
-// ? Add CORS policy to allow only React frontend
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactFrontend", policy =>
@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
-// ? Add services
+
 builder.Services.AddControllers();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBorrowerRepository, BorrowerRepository>();
@@ -34,10 +34,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// ? Enable CORS **before** HTTPS redirection
+
 app.UseCors("AllowReactFrontend");
 
-// Middleware for exception handling
+
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())

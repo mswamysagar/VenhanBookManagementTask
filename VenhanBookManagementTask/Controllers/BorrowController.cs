@@ -23,14 +23,14 @@ namespace VenhanBookManagementTask.Controllers
             _logger = logger;
         }
 
-        // ✅ Get all borrow records
+      
         [HttpGet("records")]
         public async Task<IActionResult> GetAllRecords()
         {
             try
             {
                 var result = await _svc.GetAllAsync();
-                return Ok(result); // Must return JSON array
+                return Ok(result); 
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-        // ✅ Borrow a book
+        
         [HttpPost]
         public async Task<IActionResult> Borrow([FromBody] BorrowRequestDto dto)
         {
@@ -63,7 +63,7 @@ namespace VenhanBookManagementTask.Controllers
             }
         }
 
-        // ✅ Return a book
+        
         [HttpPost("return/{id}")]
         public async Task<IActionResult> Return(Guid id)
         {

@@ -21,7 +21,7 @@ namespace VenhanBookManagementTask.DAL
                 .HasIndex(b => b.MembershipId)
                 .IsUnique();
 
-            // Relationships
+            
             modelBuilder.Entity<BorrowRecordModel>()
                 .HasOne(br => br.Book)
                 .WithMany(b => b.BorrowRecords)

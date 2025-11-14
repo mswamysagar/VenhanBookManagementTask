@@ -17,7 +17,7 @@ namespace VenhanBookManagementTask.Services
             _bookRepo = bookRepo;
         }
 
-        // ✅ Get All Books
+       
         public async Task<IEnumerable<BookModel>> GetAllAsync()
         {
             try
@@ -29,10 +29,7 @@ namespace VenhanBookManagementTask.Services
                 throw new ApplicationException("Error retrieving books.", ex);
             }
         }
-        //
-
-        // ✅ Get Book by ID
-        // Return null when not found; controller will map to 404
+        
         public async Task<BookModel?> GetByIdAsync(Guid id)
         {
             try
@@ -45,12 +42,12 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Add New Book
+        
         public async Task AddAsync(BookModel book)
         {
             try
             {
-                // Validation: Check for duplicate ISBN
+                
                 var existing = await _bookRepo.GetByISBNAsync(book.ISBN);
                 if (existing != null)
                     throw new ApplicationException("A book with this ISBN already exists.");
@@ -67,7 +64,7 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Update Existing Book
+       
         public async Task UpdateAsync(BookModel book)
         {
             try
@@ -75,7 +72,7 @@ namespace VenhanBookManagementTask.Services
                 var existing = await _bookRepo.GetByIdAsync(book.BookId)
                     ?? throw new ApplicationException("Book not found for update.");
 
-                // Update only allowed fields
+                
                 existing.Title = book.Title;
                 existing.Author = book.Author;
                 existing.Genre = book.Genre;
@@ -93,7 +90,7 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Delete Book
+        
         public async Task DeleteAsync(Guid id)
         {
             try
@@ -113,14 +110,14 @@ namespace VenhanBookManagementTask.Services
             }
         }
 
-        // ✅ Search Books by Title, Author, or Genre
+     
         public async Task<IEnumerable<BookModel>> SearchAsync(string? title, string? author, string? genre)
         {
             try
             {
                 var allBooks = await _bookRepo.GetAllAsync();
 
-                // LINQ-based dynamic filtering
+                
                 var filtered = allBooks.Where(b =>
                     (string.IsNullOrWhiteSpace(title) || b.Title.Contains(title, StringComparison.OrdinalIgnoreCase)) &&
                     (string.IsNullOrWhiteSpace(author) || b.Author.Contains(author, StringComparison.OrdinalIgnoreCase)) &&
